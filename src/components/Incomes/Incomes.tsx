@@ -4,7 +4,7 @@ import { AppContext } from '../AppContextProvider/AppContextProvider';
 import { IItemData } from '../../models/states/rootState';
 import ItemView from '../ItemView/ItemView';
 import { IOnAddItemViewData } from '../../models/props/AddItemView';
-import { Actions, addIncomesItemAction, removeIncomesItemAction } from '../../redux/rootReducer/actions';
+import { addIncomesItemAction, removeIncomesItemAction } from '../../redux/rootReducer/actions';
 import { generateNewID } from '../../utils/utils';
 
 const Incomes = () => {
@@ -32,18 +32,16 @@ const Incomes = () => {
             {context?.state.incomes.length === 0 ? (
                 <div>No incomes yet, add some!</div>
             ) : (
-                context?.state.incomes.map((exp: IItemData) => {
-                    return (
-                        <ItemView
-                            category={exp.category}
-                            key={exp.id}
-                            name={exp.name}
-                            sum={exp.sum}
-                            dateString={exp.date}
-                            onClose={() => handleClose(exp.id)}
-                        />
-                    );
-                })
+                context?.state.incomes.map((exp: IItemData) => (
+                    <ItemView
+                        category={exp.category}
+                        key={exp.id}
+                        name={exp.name}
+                        sum={exp.sum}
+                        dateString={exp.date}
+                        onClose={() => handleClose(exp.id)}
+                    />
+                ))
             )}
             <AddItemView onAdd={handleAdd} />
         </>

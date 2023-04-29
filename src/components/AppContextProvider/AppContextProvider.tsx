@@ -5,6 +5,11 @@ import { loadItemsAction } from '../../redux/rootReducer/actions';
 
 export const AppContext = React.createContext<IAppContext | null>(null);
 
+const getItemsFromLocalStorage = () => ({
+    incomes: JSON.parse(localStorage.getItem('incomes') || '[]'),
+    expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
+});
+
 const AppContextProvider = (props: PropsWithChildren) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -16,12 +21,7 @@ const AppContextProvider = (props: PropsWithChildren) => {
     }, [state.incomes]);
 
     useEffect(() => {
-        dispatch(
-            loadItemsAction({
-                incomes: JSON.parse(localStorage.getItem('incomes') || '[]'),
-                expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
-            })
-        );
+        dispatch(loadItemsAction(getItemsFromLocalStorage()));
     }, []);
 
     return <AppContext.Provider value={{ state, dispatch }}>{props.children}</AppContext.Provider>;

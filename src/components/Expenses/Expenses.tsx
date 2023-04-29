@@ -36,18 +36,16 @@ const Expenses = () => {
             {context?.state.expenses.length === 0 ? (
                 <div>No expenses yet, add some!</div>
             ) : (
-                context?.state.expenses.map((exp: IItemData) => {
-                    return (
-                        <ItemView
-                            category={exp.category}
-                            key={exp.id}
-                            name={exp.name}
-                            sum={exp.sum}
-                            dateString={exp.date}
-                            onClose={() => handleClose(exp.id)}
-                        />
-                    );
-                })
+                context?.state.expenses.map((exp: IItemData) => (
+                    <ItemView
+                        category={exp.category}
+                        key={exp.id}
+                        name={exp.name}
+                        sum={exp.sum}
+                        dateString={exp.date}
+                        onClose={() => handleClose(exp.id)}
+                    />
+                ))
             )}
             <AddItemView onAdd={handleAdd} />
         </>

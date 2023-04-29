@@ -1,57 +1,49 @@
-import { Chart } from 'react-chartjs-2';
-import {
-    Chart as ChartJS,
-    LineElement,
-    PointElement,
-    LinearScale,
-    Title,
-    BubbleController,
-    CategoryScale,
-    LineController,
-    ScatterController,
-} from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, PieController } from 'chart.js/auto';
 import type { ChartData, ChartOptions } from 'chart.js';
+import { CSSProperties, useContext } from 'react';
+import { AppContext } from '../AppContextProvider/AppContextProvider';
 
-ChartJS.register(
-    ScatterController,
-    BubbleController,
-    LineController,
-    LineElement,
-    PointElement,
-    LinearScale,
-    CategoryScale,
-    Title
-);
+ChartJS.register(PieController);
 
-const GraphOptions: ChartOptions = {
-    scales: {
-        x: {
-            type: 'linear',
-        },
-        y: {
-            type: 'linear',
-        },
-    },
+const contStyle: CSSProperties = {
+    width: '70%',
+    margin: '0 auto',
+};
+
+const GraphOptions: ChartOptions<'pie'> = {
+    // scales: {
+    //     x: {
+    //         type: 'linear',
+    //     },
+    //     y: {
+    //         type: 'linear',
+    //     },
+    // },
 };
 
 const Report = () => {
-    const chartData: ChartData = {
+    const context = useContext(AppContext);
+
+    const chartData: ChartData<'pie'> = {
+        labels: ['Red', 'Blue', 'Green'],
         datasets: [
             {
-                label: 'Report',
-                data: [300, 50, 100],
+                label: 'Sum',
+                data: [300, 70, 100],
                 backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
                 hoverOffset: 4,
             },
         ],
-        type: 'doughnut',
     };
 
     return (
-        <div>
+        <>
             <h1 className='part-heading'>Chart</h1>
-            {/* <Chart data={chartData} options={GraphOptions} /> */}
-        </div>
+            <div style={contStyle}>
+                <Pie data={chartData} options={GraphOptions} />
+            </div>
+        </>
     );
 };
 
