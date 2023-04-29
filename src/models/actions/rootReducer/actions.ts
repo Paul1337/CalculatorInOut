@@ -1,0 +1,33 @@
+import { Actions } from '../../../redux/rootReducer/actions';
+import { IItemData, IItems } from '../../states/rootState';
+export interface IAddExpensesItem {
+    type: Actions.ADD_EXPENSES_ITEM;
+    payload: IItemData;
+}
+
+export interface IRemoveExpensesItem {
+    type: Actions.REMOVE_EXPENSES_ITEM;
+    payload: number;
+}
+
+export interface IAddIncomesItem {
+    type: Actions.ADD_INCOMES_ITEM;
+    payload: IItemData;
+}
+
+export interface IRemoveIncomesItem {
+    type: Actions.REMOVE_INCOMES_ITEM;
+    payload: number;
+}
+
+export interface ILoadItems {
+    type: Actions.LOAD_ITEMS;
+    payload: IItems;
+}
+
+export type ActionType =
+    | IAddExpensesItem
+    | IRemoveExpensesItem
+    | IAddIncomesItem
+    | IRemoveIncomesItem
+    | ILoadItems;
