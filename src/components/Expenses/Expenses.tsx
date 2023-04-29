@@ -1,20 +1,16 @@
 import { useContext } from 'react';
 import AddItemView from '../AddItemVIew/AddItemView';
 import { AppContext } from '../AppContextProvider/AppContextProvider';
-import { IItemData } from '../../models/states/rootState';
+import { IExpenseItemData } from '../../models/states/rootState';
 import ItemView from '../ItemView/ItemView';
-import { IOnAddItemViewData } from '../../models/props/AddItemView';
-import {
-    Actions,
-    addExpensesItemAction,
-    removeExpensesItemAction,
-} from '../../redux/rootReducer/actions';
+import { IOnAddExpenseItemViewData, AddItemViewType } from '../../models/props/AddItemView';
+import { addExpensesItemAction, removeExpensesItemAction } from '../../redux/rootReducer/actions';
 import { generateNewID } from '../../utils/utils';
 
 const Expenses = () => {
     const context = useContext(AppContext);
 
-    const handleAdd = (data: IOnAddItemViewData) => {
+    const handleAdd = (data: IOnAddExpenseItemViewData) => {
         context?.dispatch(
             addExpensesItemAction({
                 category: data.category,
@@ -36,7 +32,7 @@ const Expenses = () => {
             {context?.state.expenses.length === 0 ? (
                 <div>No expenses yet, add some!</div>
             ) : (
-                context?.state.expenses.map((exp: IItemData) => (
+                context?.state.expenses.map((exp: IExpenseItemData) => (
                     <ItemView
                         category={exp.category}
                         key={exp.id}
@@ -47,7 +43,7 @@ const Expenses = () => {
                     />
                 ))
             )}
-            <AddItemView onAdd={handleAdd} />
+            <AddItemView onAdd={handleAdd} type={AddItemViewType.expense} />
         </>
     );
 };

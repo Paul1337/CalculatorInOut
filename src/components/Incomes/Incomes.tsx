@@ -1,16 +1,16 @@
 import { useContext } from 'react';
 import AddItemView from '../AddItemVIew/AddItemView';
 import { AppContext } from '../AppContextProvider/AppContextProvider';
-import { IItemData } from '../../models/states/rootState';
+import { IIncomesItemData } from '../../models/states/rootState';
 import ItemView from '../ItemView/ItemView';
-import { IOnAddItemViewData } from '../../models/props/AddItemView';
+import { AddItemViewType, IOnAddIncomeItemViewData } from '../../models/props/AddItemView';
 import { addIncomesItemAction, removeIncomesItemAction } from '../../redux/rootReducer/actions';
 import { generateNewID } from '../../utils/utils';
 
 const Incomes = () => {
     const context = useContext(AppContext);
 
-    const handleAdd = (data: IOnAddItemViewData) => {
+    const handleAdd = (data: IOnAddIncomeItemViewData) => {
         context?.dispatch(
             addIncomesItemAction({
                 category: data.category,
@@ -32,7 +32,7 @@ const Incomes = () => {
             {context?.state.incomes.length === 0 ? (
                 <div>No incomes yet, add some!</div>
             ) : (
-                context?.state.incomes.map((exp: IItemData) => (
+                context?.state.incomes.map((exp: IIncomesItemData) => (
                     <ItemView
                         category={exp.category}
                         key={exp.id}
@@ -43,7 +43,7 @@ const Incomes = () => {
                     />
                 ))
             )}
-            <AddItemView onAdd={handleAdd} />
+            <AddItemView onAdd={handleAdd} type={AddItemViewType.income} />
         </>
     );
 };

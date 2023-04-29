@@ -1,10 +1,31 @@
+import { ExpenseCategory, IncomeCategory } from '../states/rootState';
+
 export interface IOnAddItemViewData {
-    category: string;
     name: string;
     sum: number;
     dateString: string;
 }
 
-export interface IAddItemViewProps {
-    onAdd: (data: IOnAddItemViewData) => void;
+export interface IOnAddExpenseItemViewData extends IOnAddItemViewData {
+    category: ExpenseCategory;
 }
+
+export interface IOnAddIncomeItemViewData extends IOnAddItemViewData {
+    category: IncomeCategory;
+}
+
+export enum AddItemViewType {
+    income,
+    expense,
+}
+
+export interface IAddExpenseItemViewProps {
+    onAdd: (data: IOnAddExpenseItemViewData) => void;
+    type: AddItemViewType.expense;
+}
+export interface IAddIncomeItemViewProps {
+    onAdd: (data: IOnAddIncomeItemViewData) => void;
+    type: AddItemViewType.income;
+}
+
+export type AddItemViewPropsType = IAddExpenseItemViewProps | IAddIncomeItemViewProps;

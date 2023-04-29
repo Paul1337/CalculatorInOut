@@ -1,13 +1,16 @@
 import { CSSProperties, useState } from 'react';
-import { IAddItemViewProps } from '../../models/props/AddItemView';
+import { AddItemViewType, AddItemViewPropsType } from '../../models/props/AddItemView';
+import { ExpenseCategory, IncomeCategory } from '../../models/states/rootState';
 
 const contStyle: CSSProperties = {
     display: 'flex',
     justifyContent: 'center',
 };
 
-const AddItemView = (props: IAddItemViewProps) => {
-    const [category, setCategory] = useState('');
+const AddItemView = (props: AddItemViewPropsType) => {
+    const CategoryEnum = props.type == AddItemViewType.expense ? ExpenseCategory : IncomeCategory;
+
+    const [category, setCategory] = useState(Object.values(CategoryEnum)[0]);
     const [name, setName] = useState('');
     const [sum, setSum] = useState(0);
     const [date, setDate] = useState('');
@@ -25,15 +28,24 @@ const AddItemView = (props: IAddItemViewProps) => {
         <div style={contStyle}>
             <div>
                 <div>
-                    category:{' '}
-                    <input type='text' value={category} onChange={(e) => setCategory(e.target.value)} />
+                    <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                        {Object.values(CategoryEnum).map((value) => (
+                            <option key={value} value={value}>
+                                {value}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div>
                     name: <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div>
                     sum:{' '}
-                    <input type='number' value={sum} onChange={(e) => setSum(Number(e.target.value))} />
+                    <input
+                        type='number'
+                        value={sum.toString()}
+                        onChange={(e) => setSum(Number(e.target.value))}
+                    />
                 </div>
                 <div>
                     date:

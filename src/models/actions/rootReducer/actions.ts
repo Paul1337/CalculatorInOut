@@ -1,8 +1,8 @@
 import { Actions } from '../../../redux/rootReducer/actions';
-import { IItemData, IItems } from '../../states/rootState';
+import { IExpenseItemData, IIncomesItemData, IItems } from '../../states/rootState';
 export interface IAddExpensesItem {
     type: Actions.ADD_EXPENSES_ITEM;
-    payload: IItemData;
+    payload: IExpenseItemData;
 }
 
 export interface IRemoveExpensesItem {
@@ -12,7 +12,7 @@ export interface IRemoveExpensesItem {
 
 export interface IAddIncomesItem {
     type: Actions.ADD_INCOMES_ITEM;
-    payload: IItemData;
+    payload: IIncomesItemData;
 }
 
 export interface IRemoveIncomesItem {

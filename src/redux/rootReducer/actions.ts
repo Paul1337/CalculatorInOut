@@ -1,5 +1,5 @@
 import { ActionType } from '../../models/actions/rootReducer/actions';
-import { IItemData, IItems } from '../../models/states/rootState';
+import { IExpenseItemData, IIncomesItemData, IItemData, IItems } from '../../models/states/rootState';
 
 export enum Actions {
     ADD_INCOMES_ITEM = 'ADD_INCOMES_ITEM',
@@ -9,7 +9,7 @@ export enum Actions {
     LOAD_ITEMS = 'LOAD_ITEMS',
 }
 
-export const addIncomesItemAction = (payload: IItemData): ActionType => {
+export const addIncomesItemAction = (payload: IIncomesItemData): ActionType => {
     return {
         type: Actions.ADD_INCOMES_ITEM,
         payload,
@@ -23,7 +23,7 @@ export const removeIncomesItemAction = (payload: number): ActionType => {
     };
 };
 
-export const addExpensesItemAction = (payload: IItemData): ActionType => {
+export const addExpensesItemAction = (payload: IExpenseItemData): ActionType => {
     return {
         type: Actions.ADD_EXPENSES_ITEM,
         payload,
