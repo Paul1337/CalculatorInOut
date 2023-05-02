@@ -1,11 +1,7 @@
 import { CSSProperties, useState } from 'react';
 import { AddItemViewType, AddItemViewPropsType } from '../../models/props/AddItemView';
 import { ExpenseCategory, IncomeCategory } from '../../models/states/rootState';
-
-const contStyle: CSSProperties = {
-    display: 'flex',
-    justifyContent: 'center',
-};
+import styles from './AddItemView.module.css';
 
 const AddItemView = (props: AddItemViewPropsType) => {
     const CategoryEnum = props.type == AddItemViewType.expense ? ExpenseCategory : IncomeCategory;
@@ -25,9 +21,10 @@ const AddItemView = (props: AddItemViewPropsType) => {
     };
 
     return (
-        <div style={contStyle}>
-            <div>
-                <div>
+        <div className={styles.formCont}>
+            <div className={styles.form}>
+                <div className={styles.formRow}>
+                    category:
                     <select value={category} onChange={(e) => setCategory(e.target.value)}>
                         {Object.values(CategoryEnum).map((value) => (
                             <option key={value} value={value}>
@@ -36,10 +33,10 @@ const AddItemView = (props: AddItemViewPropsType) => {
                         ))}
                     </select>
                 </div>
-                <div>
+                <div className={styles.formRow}>
                     name: <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
-                <div>
+                <div className={styles.formRow}>
                     sum:{' '}
                     <input
                         type='number'
@@ -47,12 +44,14 @@ const AddItemView = (props: AddItemViewPropsType) => {
                         onChange={(e) => setSum(Number(e.target.value))}
                     />
                 </div>
-                <div>
+                <div className={styles.formRow}>
                     date:
                     <input type='date' value={date} onChange={(e) => setDate(e.target.value)} />
                 </div>
             </div>
-            <button onClick={handleAddClick}>Add</button>
+            <button onClick={handleAddClick} className={styles.formButton}>
+                Add
+            </button>
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { IItemViewProps } from '../../models/props/ItemView';
+import styles from './ItemView.module.css';
 
 const contStyle: CSSProperties = {
     display: 'flex',
@@ -19,12 +20,20 @@ const ItemView = (props: IItemViewProps) => {
     return (
         <div style={contStyle}>
             <div style={contStyle}>
-                <span style={nameStyle}>{props.category}</span>
-                <span style={nameStyle}>{props.name}</span>
-                <span style={sumStyle}>{props.sum}</span>
-                <span style={dateStyle}>{props.dateString}</span>
+                <span className={styles.itemParam} style={nameStyle}>
+                    {props.category}
+                </span>
+                <span className={styles.itemParam} style={nameStyle}>
+                    {props.name}
+                </span>
+                <span className={styles.itemParam} style={sumStyle}>
+                    {props.sum}
+                </span>
+                <span className={styles.itemParam} style={dateStyle}>
+                    {props.dateString}
+                </span>
             </div>
-            <span onClick={props.onClose} style={{ marginRight: '10px' }}>
+            <span className={styles.close} onClick={props.onClose} style={{ marginRight: '10px' }}>
                 &times;
             </span>
         </div>

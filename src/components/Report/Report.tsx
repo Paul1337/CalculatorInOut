@@ -15,6 +15,9 @@ ChartJS.register(PieController);
 const contStyle: CSSProperties = {
     width: '70%',
     margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
 };
 
 const GraphOptions: ChartOptions<'pie'> = {};
